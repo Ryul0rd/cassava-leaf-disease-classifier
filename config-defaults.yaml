@@ -1,0 +1,8 @@
+learning_rate:
+  value: 0.001
+epochs:
+  value: 2
+weight_decay:
+  value: 0.00001 # 1e-5
+hidden_size:
+  value: 32
