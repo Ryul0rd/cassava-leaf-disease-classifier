@@ -1,0 +1,20 @@
+program: train.py
+method: random
+metric:
+  name: val_loss
+  goal: minimize
+parameters:
+  learning_rate:
+    distribution: log_uniform
+    min: -9.2 # 1e-4
+    max: -4.6 # 1e-2
+  epochs:
+    values:
+      - 2
+      - 3
+  weight_decay:
+    value: 0.00001 # 1e-5
+  hidden_size:
+    values:
+      - 32
+      - 64
