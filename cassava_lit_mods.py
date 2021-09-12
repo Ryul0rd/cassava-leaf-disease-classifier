@@ -83,12 +83,18 @@ class CassavaLitMod(pl.LightningModule):
         return preds, y_true
 
     def validation_epoch_end(self, validation_step_outputs):
-        if self.current_epoch+1 != self.logger.experiment.config.epochs:
-            return
         preds, y_true = [], []
         for output in validation_step_outputs:
             preds.append(output[0])
             y_true.append(output[1])
+        flattened_logits = torch.flatten(torch.cat(preds))
+        self.logger.experiment.log(dict(
+            val_logits = flattened_logits.cpu(),
+            global_step = self.global_step,
+        ))
+        
+        if self.current_epoch+1 != self.logger.experiment.config.epochs:
+            return
         preds, y_true = torch.cat(preds).argmax(dim=1), torch.cat(y_true)
         preds, y_true = np.array(preds.cpu()), np.array(y_true.cpu())
         self.logger.experiment.log(dict(
