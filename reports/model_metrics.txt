@@ -1,0 +1,29 @@
+ViT:
+
+    Architecture:
+        See more info at https://github.com/rwightman/pytorch-image-models
+
+        Layer (type:depth-idx)                 Output Shape              Param #
+        PatchEmbed: 2-1                        [28, 576, 1024]           (787,456)
+        Dropout: 2-2                           [28, 577, 1024]           --
+        Sequential: 2-3                        [28, 577, 1024]           (302,309,376)
+        LayerNorm: 2-4                         [28, 577, 1024]           (2,048)
+        Identity: 2-5                          [28, 1024]                --
+        Linear: 2-6                            [28, 5]                   5,125
+        
+    Hyperparameters:
+        batch_size = 28
+        val_size = 0.2
+        epochs = 15
+        optimizer = Adam
+        transformer_size = 'large'
+        learning_rate = 3e-4
+        weight_decay = 0
+        hidden_size = 32
+
+    Parameters:
+        File too large to upload to github.
+
+    Performance Metrics:
+        Validation accuracy: 85.8%
+        See more details in cassava-leaf-disease-classifier/reports/Cassva_Capstone_Final_Report.pdf
